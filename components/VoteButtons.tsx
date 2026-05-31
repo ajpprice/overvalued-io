@@ -4,7 +4,15 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-export default function VoteButtons({ thesisId, initialUp, initialDown }: { thesisId: string; initialUp: number; initialDown: number }) {
+export default function VoteButtons({
+  thesisId,
+  initialUp,
+  initialDown,
+}: {
+  thesisId: string;
+  initialUp: number;
+  initialDown: number;
+}) {
   const router = useRouter();
   const [up, setUp] = useState(initialUp);
   const [down, setDown] = useState(initialDown);
@@ -40,20 +48,22 @@ export default function VoteButtons({ thesisId, initialUp, initialDown }: { thes
   }
 
   return (
-    <div className="flex gap-2">
+    <div style={{ display: "inline-flex", gap: 8 }}>
       <button
         onClick={() => vote(1)}
         disabled={busy}
-        className="border border-border px-3 py-1 text-xs ticker hover:bg-bear hover:text-bg transition-colors disabled:opacity-50"
+        className="ov-btn ov-btn-dark"
+        style={{ padding: "8px 12px" }}
       >
-        ↑ {up}
+        ▲ {up}
       </button>
       <button
         onClick={() => vote(-1)}
         disabled={busy}
-        className="border border-border px-3 py-1 text-xs ticker hover:bg-muted hover:text-bg transition-colors disabled:opacity-50"
+        className="ov-btn ov-btn-dark"
+        style={{ padding: "8px 12px" }}
       >
-        ↓ {down}
+        ▼ {down}
       </button>
     </div>
   );

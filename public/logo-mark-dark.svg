@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none" aria-label="Overvalued">
+  <g stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="1">
+    <line x1="0" y1="25" x2="100" y2="25"></line>
+    <line x1="0" y1="50" x2="100" y2="50"></line>
+    <line x1="0" y1="75" x2="100" y2="75"></line>
+    <line x1="25" y1="0" x2="25" y2="100"></line>
+    <line x1="50" y1="0" x2="50" y2="100"></line>
+    <line x1="75" y1="0" x2="75" y2="100"></line>
+  </g>
+  <path fill="#E63946" d="M 8 20 L 22 20 L 22 12 L 34 12 L 34 22 L 50 22 L 50 30 L 64 30 L 64 42 L 82 42 L 82 56 L 96 56 L 96 78 L 88 78 L 88 86 L 76 86 L 76 78 L 30 78 L 30 86 L 18 86 L 18 78 L 10 78 L 10 56 L 8 56 Z"></path>
+  <path fill="#FFFFFF" d="M 18 38 L 22 34 L 26 38 L 22 42 Z"></path>
+  <path fill="#E63946" d="M 8 56 L 8 64 L 0 56 Z"></path>
+  <polyline points="2,10 22,18 38,28 58,42 80,54 98,72" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="square" stroke-linejoin="miter"></polyline>
+  <path d="M 98 72 L 92 66 M 98 72 L 92 76" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="square" fill="none"></path>
+</svg>

@@ -1,26 +1,162 @@
+/* OVERVALUED · globals.css
+ * Design tokens, base reset, animations.
+ * v1.0 · 2026-05-04
+ */
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap");
+:root {
+  /* ── COLOR ── */
+  --ov-red: #E63946;
+  --ov-red-deep: #B82A36;
+  --ov-red-glow: rgba(230, 57, 70, 0.45);
+
+  --ov-black: #0D0D0D;
+  --ov-bg: #050505;
+  --ov-surface: #0F0F12;
+  --ov-surface-2: #16161B;
+  --ov-charcoal: #1A1A2E;
+
+  --ov-bone: #F4F1EA;
+  --ov-white: #FFFFFF;
+
+  --ov-fg: #FFFFFF;
+  --ov-fg-dim: #8A8A93;
+  --ov-fg-mute: #5A5A63;
+
+  --ov-hairline: #1F1F23;
+  --ov-hairline-2: #2A2A30;
+  --ov-slab-border: #2A2A2A;
+
+  /* Category accents */
+  --ov-cat-valuation: #E63946;
+  --ov-cat-consumer-hate: #FF8C42;
+  --ov-cat-brand-decay: #C77DFF;
+  --ov-cat-bags: #FFD23F;
+  --ov-cat-structural-decay: #4ECDC4;
+  --ov-cat-never-profitable: #FF5E5B;
+  --ov-cat-undervalued: #8AE6B4;
+
+  /* ── TYPOGRAPHY ── */
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-display: "Archivo Narrow", Impact, sans-serif;
+
+  /* Type scale */
+  --fs-readout: 9.5px;
+  --fs-meta: 11px;
+  --fs-body: 14px;
+  --fs-h3: 18px;
+  --fs-h2: 28px;
+  --fs-h1: 38px;
+  --fs-display: 56px;
+  --fs-hero: 156px;
+
+  /* Tracking */
+  --track-mono: 0.04em;
+  --track-readout: 0.18em;
+  --track-meta: 0.22em;
+  --track-caps: 0.28em;
+  --track-display: -0.005em;
+
+  /* ── SPACING (4px base) ── */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-12: 48px;
+
+  /* ── RADIUS ── sharp by default */
+  --radius-0: 0;
+  --radius-app: 38px;
+  --radius-pill: 999px;
+
+  /* ── SHADOWS ── */
+  --shadow-card: 0 14px 40px rgba(0, 0, 0, 0.18);
+  --shadow-doc: 0 16px 40px rgba(0, 0, 0, 0.12);
+  --shadow-merch: 0 18px 40px rgba(0, 0, 0, 0.18);
+  --shadow-bear: 0 0 0 4px rgba(230, 57, 70, 0.08), 0 0 60px rgba(230, 57, 70, 0.25);
+
+  /* ── MOTION ── */
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --dur-fast: 120ms;
+  --dur-base: 180ms;
+}
+
+* { box-sizing: border-box; }
 
 html, body {
-  background: #0a0a0a;
-  color: #f5f5f4;
-  font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
+  margin: 0; padding: 0;
+  background: var(--ov-bg);
+  color: var(--ov-fg);
+  font-family: var(--font-mono);
+  font-weight: 400;
 }
 
-.headline {
-  font-family: "Source Serif 4", Georgia, serif;
-  letter-spacing: -0.01em;
+::selection { background: var(--ov-red); color: var(--ov-white); }
+
+/* ── TYPE UTILITIES ── */
+.font-mono { font-family: var(--font-mono); }
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: var(--track-display);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ov-fg-dim);
+}
+.label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: var(--track-meta);
+  text-transform: uppercase;
+  color: var(--ov-fg-mute);
+}
+.readout {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: var(--track-readout);
+  text-transform: uppercase;
 }
 
-.ticker {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  letter-spacing: 0.02em;
+/* ── ANIMATIONS ── */
+@keyframes ov-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.06), 0 0 60px rgba(230, 57, 70, 0.20);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(230, 57, 70, 0.0), 0 0 90px rgba(230, 57, 70, 0.45);
+  }
 }
+.ov-pulse { animation: ov-pulse 2.2s ease-in-out infinite; }
 
-a { color: inherit; }
+@keyframes ov-ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.ov-ticker-scroll { animation: ov-ticker-scroll 40s linear infinite; }
 
-::selection { background: #ef4444; color: #0a0a0a; }
+@keyframes ov-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.ov-fade-in { animation: ov-fade-in 240ms var(--ease) both; }
+
+@keyframes ov-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0.2; }
+}
+.ov-blink { animation: ov-blink 1s step-end infinite; }

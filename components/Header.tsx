@@ -1,28 +1,52 @@
-import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+"use client";
 
-export default async function Header() {
-  const supabase = createClient();
-  let email: string | null = null;
-  if (supabase) {
-    const { data } = await supabase.auth.getUser();
-    email = data.user?.email ?? null;
-  }
+import * as React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { LogoFull } from "@/components/design/LogoFull";
+
+type NavKey = "STOCKS" | "BAGS" | "THESES" | "WATCHLIST" | "LEADERBOARD";
+
+const HREF: Record<NavKey, string> = {
+  STOCKS: "/",
+  BAGS: "/bags",
+  THESES: "/submit",
+  WATCHLIST: "/",
+  LEADERBOARD: "/leaderboard",
+};
+
+export default function Header() {
+  const pathname = usePathname() ?? "/";
+  let active: NavKey = "STOCKS";
+  if (pathname.startsWith("/bags")) active = "BAGS";
+  else if (pathname.startsWith("/leaderboard")) active = "LEADERBOARD";
+  else if (pathname.startsWith("/submit")) active = "THESES";
+
+  const links: NavKey[] = ["STOCKS", "BAGS", "THESES", "WATCHLIST", "LEADERBOARD"];
+
   return (
-    <header className="border-b border-border px-6 py-4">
-      <div className="max-w-5xl mx-auto flex items-center justify-between">
-        <Link href="/" className="headline text-xl font-bold tracking-tight">
-          overvalued<span className="text-bear">.io</span>
+    <div className="ov-nav">
+      <div style={{ display: "flex", alignItems: "center", gap: 40 }}>
+        <Link href="/" style={{ display: "inline-block" }}>
+          <LogoFull scale={0.9} />
         </Link>
-        <nav className="flex items-center gap-6 text-sm">
-          <Link href="/submit" className="hover:text-bear transition-colors">Submit Thesis</Link>
-          {email ? (
-            <span className="text-muted ticker text-xs">{email}</span>
-          ) : (
-            <Link href="/login" className="hover:text-bear transition-colors">Sign in</Link>
-          )}
-        </nav>
+        <div style={{ display: "flex", gap: 28 }}>
+          {links.map((l) => (
+            <Link
+              key={l}
+              href={HREF[l]}
+              className={`ov-nav-link ${active === l ? "active" : ""}`}
+            >
+              {l}
+            </Link>
+          ))}
+        </div>
       </div>
-    </header>
+      <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+        <Link href="/login">
+          <button className="ov-btn ov-btn-primary">SIGN IN</button>
+        </Link>
+      </div>
+    </div>
   );
 }

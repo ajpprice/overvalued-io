@@ -1,12 +1,17 @@
-import { scoreColor } from "@/lib/score";
+import { BearBadge } from "@/components/design/BearBadge";
 
-export default function BearScoreBadge({ score, large = false }: { score: number; large?: boolean }) {
-  const { label, className } = scoreColor(score);
-  const display = Number.isFinite(score) ? score.toFixed(1) : "—";
-  return (
-    <div className={`flex items-baseline gap-3 ${large ? "" : ""}`}>
-      <div className={`ticker font-bold ${large ? "text-6xl" : "text-2xl"} ${className}`}>{display}</div>
-      <div className={`uppercase tracking-widest text-xs ${className}`}>{label}</div>
-    </div>
-  );
+export default function BearScoreBadge({
+  score,
+  size = "md",
+  large,
+}: {
+  score: number;
+  size?: "md" | "xl";
+  large?: boolean;
+}) {
+  const s = large || size === "xl" ? "xl" : "md";
+  const safe = Number.isFinite(score) ? Math.round(score) : 0;
+  return <BearBadge score={safe} size={s} />;
 }
+
+export { BearBadge };

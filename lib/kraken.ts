@@ -1,13 +1,14 @@
 import { krakenAffiliateId } from "./env";
 
-const XSTOCKS = new Set<string>([
+export const KRAKEN_XSTOCKS_LIST = new Set<string>([
   "TSLA", "NVDA", "AAPL", "GOOGL", "MSFT", "AMZN", "META", "SPY", "QQQ",
   "CMCSA", "BAC", "GME", "HOOD", "NFLX", "PFE", "PM", "XOM", "MCD", "WMT",
   "COIN", "MSTR", "INTC", "ORCL", "IBM", "KO", "PEP", "JPM", "GS", "CRM", "PLTR",
+  "ARM",
 ]);
 
 export function hasXStock(ticker: string): boolean {
-  return XSTOCKS.has(ticker.toUpperCase());
+  return KRAKEN_XSTOCKS_LIST.has(ticker.toUpperCase());
 }
 
 export function krakenAsset(ticker: string): string | null {
@@ -21,8 +22,4 @@ export function krakenLink(ticker: string): string {
     return `https://www.kraken.com/sign-up?referral=${encodeURIComponent(ref)}&asset=${asset}`;
   }
   return `https://www.kraken.com/sign-up?referral=${encodeURIComponent(ref)}`;
-}
-
-export function krakenButtonText(ticker: string): string {
-  return hasXStock(ticker) ? "🐻 Short It on Kraken" : "Sign up on Kraken";
 }

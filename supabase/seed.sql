@@ -16,13 +16,39 @@ values ('00000000-0000-0000-0000-000000000001', 420, 0)
 on conflict (id) do nothing;
 
 -- ============ stocks ============
-insert into public.stocks(ticker, name) values
-  ('TSLA', 'Tesla, Inc.'),
-  ('META', 'Meta Platforms, Inc.'),
-  ('COIN', 'Coinbase Global, Inc.'),
-  ('GME',  'GameStop Corp.'),
-  ('MSTR', 'MicroStrategy Incorporated')
+insert into public.stocks(ticker, name, exchange, category, current_price, valuation_discount_pct, short_interest_pct, trustpilot_score, reddit_sentiment) values
+  ('TSLA', 'Tesla, Inc.',                 'NASDAQ', 'valuation',        180.00,  45,  18,  2.1,  -0.4),
+  ('META', 'Meta Platforms, Inc.',        'NASDAQ', 'valuation',        540.00,  20,   2,  1.9,  -0.2),
+  ('COIN', 'Coinbase Global, Inc.',       'NASDAQ', 'structural_decay', 220.00,  35,  12,  2.4,  -0.1),
+  ('GME',  'GameStop Corp.',              'NYSE',   'never_profitable',  18.00,  60,  21,  2.8,   0.1),
+  ('MSTR', 'MicroStrategy Incorporated',  'NASDAQ', 'valuation',       1500.00,  50,  15,  3.0,   0.0),
+  ('BOO',  'Boohoo Group plc',            'LSE',    'brand_decay',        0.30,  30,   8,  1.6,  -0.5),
+  ('PTON', 'Peloton Interactive, Inc.',   'NASDAQ', 'brand_decay',        4.50,  25,  19,  2.0,  -0.3)
 on conflict (ticker) do nothing;
+
+-- ============ bags_profiles ============
+insert into public.bags_profiles(slug, name, profile_type, description, bags_score, track_record_summary) values
+  ('chamath-palihapitiya', 'Chamath Palihapitiya', 'vc',         'SPAC king turned SPAC graveyard caretaker.',           92, 'Pumped 4 SPACs to retail. Combined drawdown 78%.'),
+  ('jim-cramer',           'Jim Cramer',           'podcaster',  'CNBC Mad Money host. Inverse-Cramer ETF exists for a reason.', 88, 'Top-ticked META at $370 before 75% drawdown.'),
+  ('cathie-wood',          'Cathie Wood',          'vc',         'ARK Invest. Innovation, deep convictions, deeper drawdowns.',  85, 'ARKK -75% from 2021 peak. Still buying.'),
+  ('elizabeth-warren',     'Elizabeth Warren',     'politician', 'US Senator. Reliably wrong on banks.',                          70, 'Crusaded against SVB regulation rollback then bailed it out.')
+on conflict (slug) do nothing;
+
+-- ============ bags_picks ============
+insert into public.bags_picks(bags_profile_id, ticker_or_name, pick_date, pick_price, current_price, return_pct, notes)
+select id, 'TSLA',  '2023-01-15', 120.00, 180.00,  50.0,  'Endorsed on All-In.'              from public.bags_profiles where slug='chamath-palihapitiya'
+union all
+select id, 'COIN',  '2024-03-10', 260.00, 220.00, -15.4,  'SPAC-adjacent crypto exposure.'   from public.bags_profiles where slug='chamath-palihapitiya'
+union all
+select id, 'META',  '2022-11-04', 90.00,  540.00, 500.0,  'Sold the bottom on-air.'          from public.bags_profiles where slug='jim-cramer'
+union all
+select id, 'MSTR',  '2024-11-22', 400.00, 1500.0, 275.0,  'Mad Money buy-buy-buy.'           from public.bags_profiles where slug='jim-cramer'
+union all
+select id, 'PTON',  '2021-01-08', 160.00, 4.50,  -97.2,  'ARKK top-5 holding 2021.'         from public.bags_profiles where slug='cathie-wood'
+union all
+select id, 'TSLA',  '2020-12-22', 220.00, 180.00, -18.2,  'Long-term ARK conviction.'        from public.bags_profiles where slug='cathie-wood'
+union all
+select id, 'BOO',   '2020-06-15', 4.00,   0.30,  -92.5,   'Praised in floor speech.'         from public.bags_profiles where slug='elizabeth-warren';
 
 -- ============ theses ============
 insert into public.theses(ticker, title, body, key_risks, target_price, time_horizon, author_id) values

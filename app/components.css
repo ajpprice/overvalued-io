@@ -1,0 +1,106 @@
+/* OVERVALUED · component-layer styles
+ * Imported by globals.css after tokens. Defines the ov-* classes used by
+ * the React components.
+ */
+
+.ov-card {
+  background: var(--ov-surface);
+  border: 1px solid var(--ov-hairline);
+  padding: 20px;
+  position: relative;
+}
+
+.ov-hr { height: 1px; background: var(--ov-hairline); width: 100%; }
+
+.ov-tag {
+  display: inline-block;
+  padding: 3px 8px;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  line-height: 1.4;
+}
+.ov-tag.cat-valuation        { color: var(--ov-cat-valuation); }
+.ov-tag.cat-consumer_hate    { color: var(--ov-cat-consumer-hate); }
+.ov-tag.cat-brand_decay      { color: var(--ov-cat-brand-decay); }
+.ov-tag.cat-bags             { color: var(--ov-cat-bags); }
+.ov-tag.cat-structural_decay { color: var(--ov-cat-structural-decay); }
+.ov-tag.cat-never_profitable { color: var(--ov-cat-never-profitable); }
+.ov-tag.cat-undervalued      { color: var(--ov-cat-undervalued); border-color: var(--ov-cat-undervalued); }
+
+/* Buttons */
+.ov-btn {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ov-btn-primary { background: var(--ov-red); color: #fff; }
+.ov-btn-primary:hover { background: var(--ov-red-deep); }
+.ov-btn-ghost { background: transparent; color: #fff; border: 1px solid #fff; }
+.ov-btn-ghost:hover { background: #fff; color: var(--ov-black); }
+.ov-btn-dark {
+  background: #131318;
+  color: #fff;
+  border: 1px solid var(--ov-hairline-2);
+  font-size: 11px;
+}
+.ov-btn-dark:hover { background: #1c1c22; border-color: var(--ov-red); }
+
+/* Nav */
+.ov-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 36px;
+  border-bottom: 1px solid var(--ov-hairline);
+  background: var(--ov-bg);
+  position: sticky; top: 0; z-index: 50;
+}
+.ov-nav-link {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ov-fg-dim);
+  cursor: pointer;
+}
+.ov-nav-link:hover { color: #fff; }
+.ov-nav-link.active { color: #fff; border-bottom: 2px solid var(--ov-red); padding-bottom: 4px; }
+
+/* SHORT IT panel — defining brand element */
+.ov-short-it {
+  background: var(--ov-surface);
+  border: 1px solid var(--ov-hairline);
+  border-top: 2px solid var(--ov-red);
+  padding: 20px;
+}
+.ov-short-it-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+/* Meter (for Bear-Score breakdown) */
+.ov-meter {
+  height: 6px; background: #1A1A20; position: relative; overflow: hidden;
+}
+.ov-meter > span {
+  display: block; height: 100%;
+  background: linear-gradient(90deg, #E63946, #B82A36);
+}
+
+/* Table */
+.ov-tbl { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 12px; }
+.ov-tbl th, .ov-tbl td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--ov-hairline); }
+.ov-tbl th { color: var(--ov-fg-mute); font-weight: 500; font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; }
+.ov-tbl td.num { font-variant-numeric: tabular-nums; text-align: right; }
+.ov-tbl td.num.red { color: var(--ov-red); }

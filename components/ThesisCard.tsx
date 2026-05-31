@@ -27,33 +27,60 @@ export default function ThesisCard({ thesis, truncated = false }: { thesis: Thes
   })();
 
   return (
-    <article className="border border-border bg-panel p-5 rounded-none">
-      <div className="flex items-baseline justify-between gap-4 mb-2">
-        <Link href={`/stock/${thesis.ticker}`} className="ticker text-bear font-bold text-sm">
+    <article className="ov-card" style={{ padding: 18 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 8 }}>
+        <Link
+          href={`/stock/${thesis.ticker}`}
+          className="font-mono"
+          style={{ color: "var(--ov-red)", fontWeight: 700, letterSpacing: "0.04em", fontSize: 12 }}
+        >
           ${thesis.ticker}
         </Link>
-        <span className="text-xs text-muted">{age}</span>
+        <span className="font-mono" style={{ fontSize: 10, color: "var(--ov-fg-mute)", letterSpacing: "0.18em", textTransform: "uppercase" }}>
+          {age}
+        </span>
       </div>
-      <h3 className="headline text-xl font-semibold mb-3 leading-snug">{thesis.title}</h3>
-      <div className={`prose prose-invert prose-sm max-w-none text-ink/90 ${truncated ? "line-clamp-3" : ""}`}>
-        <ReactMarkdown>{thesis.body}</ReactMarkdown>
+      <h3
+        className="font-display"
+        style={{ fontSize: 22, color: "#fff", lineHeight: 1.1, marginBottom: 10, letterSpacing: "-0.005em" }}
+      >
+        {thesis.title.toUpperCase()}
+      </h3>
+      <div
+        className="font-mono"
+        style={{ fontSize: 12, color: "var(--ov-fg-dim)", lineHeight: 1.6, letterSpacing: "0.02em" }}
+      >
+        <div className={truncated ? "line-clamp-3" : ""}>
+          <ReactMarkdown>{thesis.body}</ReactMarkdown>
+        </div>
       </div>
       {thesis.key_risks?.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-4">
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 12 }}>
           {thesis.key_risks.map((r) => (
-            <span key={r} className="text-[10px] uppercase tracking-wider border border-border px-2 py-1 text-muted">
-              risk: {r}
+            <span key={r} className="ov-tag" style={{ color: "var(--ov-fg-dim)" }}>
+              RISK · {r}
             </span>
           ))}
         </div>
       )}
-      <div className="flex items-center gap-6 mt-4 pt-3 border-t border-border text-xs text-muted ticker">
-        <span>↑ {thesis.upvotes}</span>
-        <span>↓ {thesis.downvotes}</span>
-        <span>net {score >= 0 ? "+" : ""}{score}</span>
+      <div
+        className="font-mono"
+        style={{
+          display: "flex",
+          gap: 18,
+          marginTop: 14,
+          paddingTop: 10,
+          borderTop: "1px solid var(--ov-hairline)",
+          fontSize: 11,
+          color: "var(--ov-fg-dim)",
+          letterSpacing: "0.1em",
+        }}
+      >
+        <span>▲ {thesis.upvotes}</span>
+        <span>▼ {thesis.downvotes}</span>
+        <span>NET {score >= 0 ? "+" : ""}{score}</span>
         {thesis.target_price != null && <span>PT ${thesis.target_price}</span>}
-        {thesis.time_horizon && <span>{thesis.time_horizon}</span>}
-        {thesis.author_reputation != null && <span>rep {thesis.author_reputation}</span>}
+        {thesis.time_horizon && <span>{thesis.time_horizon.toUpperCase()}</span>}
       </div>
     </article>
   );

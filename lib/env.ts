@@ -15,3 +15,22 @@ export function isFinnhubConfigured(): boolean {
 export function krakenAffiliateId(): string {
   return getEnv("KRAKEN_AFFILIATE_ID") ?? "PENDING";
 }
+
+export function igAffiliateId(): string {
+  return getEnv("IG_AFFILIATE_ID") ?? "PENDING";
+}
+
+export function saxoAffiliateId(): string {
+  return getEnv("SAXO_AFFILIATE_ID") ?? "PENDING";
+}
+
+export function etoroAffiliateId(): string {
+  return getEnv("ETORO_AFFILIATE_ID") ?? "PENDING";
+}
+
+export const env = {
+  get KRAKEN_AFFILIATE_ID() { return krakenAffiliateId(); },
+  get IG_AFFILIATE_ID() { return igAffiliateId(); },
+  get SAXO_AFFILIATE_ID() { return saxoAffiliateId(); },
+  get ETORO_AFFILIATE_ID() { return etoroAffiliateId(); },
+};
